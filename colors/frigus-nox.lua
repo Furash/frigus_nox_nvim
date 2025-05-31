@@ -1,0 +1,1 @@
+require('frigus_nox').setup()
