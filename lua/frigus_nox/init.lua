@@ -57,8 +57,8 @@ local function set_highlights()
     ["@symbol"] = { fg = p.white },
     ["@text"] = { fg = p.white },
     ["@text.danger"] = { fg = groups.error },
-    ["@text.diff.add"] = { fg = groups.git_add, bg = groups.git_add, blend = 20 },
-    ["@text.diff.delete"] = { fg = groups.git_delete, bg = groups.git_delete, blend = 20 },
+    ["@text.diff.add"] = { fg = groups.git_add, bg = utilities.blend_colors(groups.git_add, p.bg, 0.2) },
+    ["@text.diff.delete"] = { fg = groups.git_delete, bg = utilities.blend_colors(groups.git_delete, p.bg, 0.2) },
     ["@text.emphasis"] = { italic = true },
     ["@text.environment"] = { link = "Macro" },
     ["@text.environment.name"] = { link = "Type" },
@@ -93,10 +93,10 @@ local function set_highlights()
     CursorColumn = { bg = p.surface },
     CursorLine = { bg = p.surface },
     CursorLineNr = { fg = p.subtle, bold = true },
-    DiffAdd = { bg = p.green, blend = 20 },
-    DiffChange = { bg = p.yellow, blend = 20 },
-    DiffDelete = { bg = p.red, blend = 20 },
-    DiffText = { bg = p.blue, blend = 40 },
+    DiffAdd = { bg = utilities.blend_colors(p.green, p.bg, 0.2) },
+    DiffChange = { bg = utilities.blend_colors(p.yellow, p.bg, 0.2) },
+    DiffDelete = { bg = utilities.blend_colors(p.red, p.bg, 0.2) },
+    DiffText = { bg = utilities.blend_colors(p.blue, p.bg, 0.4) },
     diffAdded = { link = "DiffAdd" },
     diffChanged = { link = "DiffChange" },
     diffRemoved = { link = "DiffDelete" },
@@ -108,8 +108,8 @@ local function set_highlights()
     Folded = { fg = p.white, bg = groups.panel },
     IncSearch = { bg = p.green, fg = p.bg, bold = true },
     LineNr = { fg = p.muted },
-    MatchParen = { fg = p.white, bg = p.green, bold = true },
-    ModeMsg = { fg = p.grey },
+    MatchParen = { fg = p.bg, bg = p.blue, bold = true },
+    ModeMsg = { fg = p.blue },
     MoreMsg = { fg = p.blue },
     NonText = { fg = p.subtle },
     Normal = { fg = p.white, bg = p.bg },
@@ -139,7 +139,7 @@ local function set_highlights()
     StatusLine = { fg = p.white, bg = p.bg },
     StatusLineNC = { fg = p.muted, bg = p.bg },
     StatusLineTerm = { fg = p.bg, bg = p.purple },
-    StatusLineTermNC = { fg = p.bg, bg = p.purple, blend = 60 },
+    StatusLineTermNC = { fg = p.bg, bg = utilities.blend_colors(p.purple, p.bg, 0.6) },
     Substitute = { link = "IncSearch" },
     TabLine = { fg = p.white, bg = p.bg },
     TabLineFill = { bg = p.bg },
@@ -150,7 +150,7 @@ local function set_highlights()
     WarningMsg = { fg = p.yellow, bg=p.bg, bold = true },
     WildMenu = { link = "IncSearch" },
     WinBar = { fg = p.grey, bg = groups.panel },
-    WinBarNC = { fg = p.grey, bg = groups.panel, blend = 60 },
+    WinBarNC = { fg = p.grey, bg = utilities.blend_colors(groups.panel, p.bg, 0.6) },
     WinSeparator = { fg = p.grey },
 
     DiagnosticError = { fg = p.red },
@@ -178,11 +178,11 @@ local function set_highlights()
     DiagnosticUnderlineInfo = { sp = p.blue, undercurl = true },
     DiagnosticUnderlineOk = { sp = groups.ok, undercurl = true },
     DiagnosticUnderlineWarn = { sp = p.yellow, undercurl = true },
-    DiagnosticVirtualTextError = { fg = p.red  },
-    DiagnosticVirtualTextHint = { fg = p.blue  },
-    DiagnosticVirtualTextInfo = { fg = p.blue  },
-    DiagnosticVirtualTextOk = { fg = p.green, bg = groups.ok, blend = 50 },
-    DiagnosticVirtualTextWarn = { fg = p.yellow, bg = p.yellow, blend = 50 },
+    DiagnosticVirtualTextError = { fg = p.red, bg = utilities.blend_colors(p.red, p.bg, 0.2) },
+    DiagnosticVirtualTextHint = { fg = p.blue, bg = utilities.blend_colors(p.blue, p.bg, 0.1) },
+    DiagnosticVirtualTextInfo = { fg = p.blue, bg = utilities.blend_colors(p.blue, p.bg, 0.2) },
+    DiagnosticVirtualTextOk = { fg = p.green, bg = utilities.blend_colors(p.green, p.bg, 0.2) },
+    DiagnosticVirtualTextWarn = { fg = p.yellow, bg = utilities.blend_colors(p.yellow, p.bg, 0.1) },
 
     Boolean = { fg = p.white },
     Character = { fg = p.white },
@@ -202,7 +202,7 @@ local function set_highlights()
     Label = { fg = p.green },
     LspCodeLens = { fg = p.grey },
     LspCodeLensSeparator = { fg = p.grey },
-    LspInlayHint = { fg = p.grey, bg = p.grey, blend = 10 },
+    LspInlayHint = { fg = p.grey, bg = utilities.blend_colors(p.grey, p.bg, 0.1) },
     LspReferenceRead = { bg = p.grey },
     LspReferenceText = { bg = p.grey },
     LspReferenceWrite = { bg = p.grey },
@@ -220,7 +220,7 @@ local function set_highlights()
     String = { fg = p.green },
     Structure = { fg = p.subtle },
     Tag = { fg = p.blue },
-    Todo = { fg = p.blue, bg = p.blue, blend = 20 },
+    Todo = { fg = p.blue, bg = utilities.blend_colors(p.blue, p.bg, 0.2) },
     Type = { fg = p.white },
     TypeDef = { link = "Type" },
     Underlined = { fg = p.blue, underline = true },
@@ -259,13 +259,9 @@ local function set_highlights()
     markdownUrl = { fg = p.green, underline = true },
 
     -- IBL highlights
-    SnacksIndent1 = { fg = p.muted },
-    SnacksIndent2 = { fg = p.muted },
-    SnacksIndent3 = { fg = p.muted },
-    SnacksIndent4 = { fg = p.muted },
-    SnacksIndent5 = { fg = p.muted },
-    SnacksIndent6 = { fg = p.muted },
-    SnacksIndent7 = { fg = p.muted },
+    SnacksIndent = { fg = p.grey },
+    SnacksIndentScope = { fg = utilities.blend_colors(p.blue, p.bg, 0.2) },
+    SnacksIndentChunk = { fg = utilities.blend_colors(p.blue, p.bg, 0.4) },
 
     -- Bufferline highlights
     BufferLineDevIconLua = { bg = p.bg },
@@ -296,10 +292,10 @@ end
 function M.setup(opts)
   config.setup(opts)
   set_highlights()
-  
+
   -- Setup plugins if they exist
   setup_lualine()
   setup_bufferline()
 end
 
-return M 
+return M
