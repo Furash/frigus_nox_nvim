@@ -19,6 +19,7 @@ local palette = {
   highlight_low = '#21252b',
   highlight_med = '#3a4f6b',
   highlight_high = '#587584',
+  black = '#000000',
   none = "NONE",
 }
 
